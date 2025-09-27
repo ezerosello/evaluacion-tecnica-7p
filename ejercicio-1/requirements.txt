@@ -1,0 +1,5 @@
+fastapi     # framework para construir apis rapidas
+uvicorn     # servidor ASGI para correr aplicaciones FastAPI
+sqlalchemy  # ORM para manejar bases de datos
+requests    # para hacer solicitudes HTTP
+pydantic    # para validación de datos
