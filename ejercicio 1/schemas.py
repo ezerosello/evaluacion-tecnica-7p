@@ -1,4 +1,4 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, ConfigDict
 from typing import Optional
 
 class CountryOut(BaseModel):
@@ -10,15 +10,13 @@ class CountryOut(BaseModel):
     code: str
     capital: Optional[str]
 
-    class Config:
-        from_attributes = True
+    model_config = ConfigDict(from_attributes=True)
 
 class RegionStat(BaseModel):
     region: str
     value: Optional[float]
 
-    class Config:
-        from_attributes = True
+    model_config = ConfigDict(from_attributes=True)
 
 class CapitalOut(BaseModel):
     id: int
@@ -29,8 +27,7 @@ class CapitalOut(BaseModel):
     country_name: str
     country_code: str
 
-    class Config:
-        from_attributes = True
+    model_config = ConfigDict(from_attributes=True)
 
 class WeatherOut(BaseModel):
     city: str
@@ -38,5 +35,4 @@ class WeatherOut(BaseModel):
     humidity: Optional[int]
     last_updated: Optional[str]
 
-    class Config:
-        from_attributes = True
+    model_config = ConfigDict(from_attributes=True)

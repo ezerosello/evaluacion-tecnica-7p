@@ -2,7 +2,7 @@ from models import Base, Country, Capital
 from database import engine, SessionLocal
 from datetime import datetime, timezone
 import requests
-
+import os
 
 def init_db():
     Base.metadata.create_all(bind=engine)

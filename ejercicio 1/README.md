@@ -20,6 +20,12 @@ pip install -r requirements.txt
 uvicorn app:app --reload
 ```
 
+# Ejecución de tests
+
+### Desde la raiz del proyecto, ejecutar
+```bash
+python run_tests.py
+```
 
 # Ejemplos de prueba:
 
@@ -61,12 +67,14 @@ curl "http://127.0.0.1:8000/weather/buenos%20aires"
 
 # Uso de IA
 
-### Usé Copilot para generar el modelo de las tablas countries y capitals
+- Usé Copilot para generar el modelo de las tablas countries y capitals
 
-### Usé ChatGPT generar las funciones que rellenan las tablas de la base de datos
+- Usé ChatGPT generar las funciones que rellenan las tablas de la base de datos
 
-### Usé Copilot para configurar el endpoint stats, teniendo en cuenta las métricas población, área, y densidad poblacional. (prompt: 'endpoint en FastAPI para obtener cantidad de habitantes, area total y densidad de población de una región particular")
+- Usé Copilot para configurar el endpoint stats, teniendo en cuenta las métricas población, área, y densidad poblacional. (prompt: 'endpoint en FastAPI para obtener cantidad de habitantes, area total y densidad de población de una región particular")
 
-### Usé Copilot para configurar el endpoint weather/{city} (prompt: 'endpoint en FastAPI para obtener temperatura, humedad y fecha de consulta de una ciudad")
+- Usé Copilot para configurar el endpoint weather/{city} (prompt: 'endpoint en FastAPI para obtener temperatura, humedad y fecha de consulta de una ciudad")
 
-### Usé Copilot para generar los schemas de respuesta
+- Usé Copilot para generar los schemas de respuesta
+
+- Usé ChatGPT para testear los endpoints y la DB

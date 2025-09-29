@@ -29,6 +29,8 @@ def get_db():
 def get_countries(region: Optional[str] = Query(None), db: Session = Depends(get_db)):
     if region:
         countries = db.query(Country).filter(Country.region == region).all()
+        if not countries:
+            raise HTTPException(status_code=404, detail=f"No se encontraron países en la región '{region}'")
     else:
         countries = db.query(Country).all()
     return countries
