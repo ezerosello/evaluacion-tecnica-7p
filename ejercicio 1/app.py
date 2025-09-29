@@ -26,7 +26,7 @@ def get_db():
 
 
 @app.get("/countries", response_model=List[CountryOut])
-def read_countries(region: Optional[str] = Query(None), db: Session = Depends(get_db)):
+def get_countries(region: Optional[str] = Query(None), db: Session = Depends(get_db)):
     if region:
         countries = db.query(Country).filter(Country.region == region).all()
     else:
@@ -82,7 +82,7 @@ def get_country_stats(metric: str, db: Session = Depends(get_db)):
     
     
 @app.get("/capitals", response_model=List[CapitalOut])
-def read_capitals(db: Session = Depends(get_db)):
+def get_capitals(db: Session = Depends(get_db)):
     capitals = db.query(Capital).join(Country).all()
     result = []
     for capital in capitals:
@@ -99,7 +99,7 @@ def read_capitals(db: Session = Depends(get_db)):
 
 
 @app.get("/weather/{city}", response_model=WeatherOut)
-def get_weather_from_db(city: str, db: Session = Depends(get_db)):
+def get_capital_weather(city: str, db: Session = Depends(get_db)):
     capital = db.query(Capital).filter(Capital.name.ilike(city)).first()
 
     if not capital:
