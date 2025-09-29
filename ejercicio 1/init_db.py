@@ -1,7 +1,6 @@
-from models import Base
+from models import Base, Country
 from database import engine, SessionLocal
 import requests
-from models import Country
 
 def init_db():
     Base.metadata.create_all(bind=engine)

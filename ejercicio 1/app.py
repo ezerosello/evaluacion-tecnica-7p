@@ -1,17 +1,17 @@
-from fastapi import FastAPI, Depends, Query
-from sqlalchemy import func
-from sqlalchemy.orm import Session
-from init_db import init_db, load_countries
-from database import SessionLocal
-from models import Country
 from contextlib import asynccontextmanager
+from database import SessionLocal
+from fastapi import FastAPI, Depends, Query, HTTPException
+from init_db import init_db, load_countries
+from models import Country
+from sqlalchemy import func, case, cast, Float
+from sqlalchemy.orm import Session
 from typing import Optional
+
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     init_db()
     load_countries()
-    print("Database initialized and countries loaded.")
     yield
 
 app = FastAPI(lifespan=lifespan)
@@ -33,28 +33,70 @@ def read_countries(region: Optional[str] = Query(None), db: Session = Depends(ge
     return countries
 
 
-from fastapi import HTTPException
-
 @app.get("/countries/stats")
 def get_country_stats(metric: str, db: Session = Depends(get_db)):
-    if metric not in ["population", "area"]:
-        raise HTTPException(status_code=400, detail="Metric must be 'population' or 'area'")
+    if metric in ["population", "area"]:
+        column = getattr(Country, metric)
 
-    # Selección dinámica de columna
-    column = getattr(Country, metric)
-
-    # Consulta agregada: promedio por región
-    results = (
-        db.query(
-            Country.region,
-            func.avg(column).label(f"average_{metric}")
+        results = (
+            db.query(
+                Country.region,
+                func.avg(column).label(f"average_{metric}")
+            )
+            .group_by(Country.region)
+            .all()
         )
-        .group_by(Country.region)
-        .all()
-    )
 
-    # Transformar a lista de dicts
-    return [
-        {"region": region, f"average_{metric}": round(avg, 2) if avg else None}
-        for region, avg in results
-    ]
+        return [
+            {"region": region, f"average_{metric}": round(avg, 2) if avg else None}
+            for region, avg in results
+        ]
+
+    elif metric == "density":
+        # Evitar división por cero o NULL
+        results = (
+            db.query(
+                Country.region,
+                func.avg(
+                    case(
+                        (Country.area != None, Country.population / cast(Country.area, Float)),
+                        else_=None
+                    )
+                ).label("average_density")
+            )
+            .group_by(Country.region)
+            .all()
+        )
+
+        return [
+            {"region": region, "average_density": round(density, 2) if density else None}
+            for region, density in results
+        ]
+
+    elif metric == "max_population":
+        subquery = (
+            db.query(
+                Country.region,
+                func.max(Country.population).label("max_pop")
+            )
+            .group_by(Country.region)
+            .subquery()
+        )
+
+        results = (
+            db.query(Country.region, Country.name, Country.population)
+            .join(subquery, (Country.region == subquery.c.region) & (Country.population == subquery.c.max_pop))
+            .all()
+        )
+
+        return [
+            {"region": region, "country": name, "population": population}
+            for region, name, population in results
+        ]
+
+    else:
+        raise HTTPException(
+            status_code=400,
+            detail="Metric must be one of: 'population', 'area', 'density', 'max_population'"
+        )
+
