@@ -9,8 +9,7 @@ docker build -t api-exercise .
 
 ### 2º Correr la api
 ```bash
-docker run -p 8000:8000 api-exercise (Windows)
-docker run --name api-ia -p 8000:8000 -e API_KEY=9a4e499d3f7bc641d86290a592416c6b api-exercise  (Linux)
+docker run --name api-ia -p 8000:8000 -e API_KEY=9a4e499d3f7bc641d86290a592416c6b api-exercise
 ```
 
 # Ejemplos de prueba:
@@ -52,15 +51,11 @@ curl "http://localhost:8000/weather/buenos%20aires"
 
 # Ejecución de tests 
 
-### En Linux, con el proyecto corriendo en Docker, ejecutar
+### Con el proyecto corriendo en Docker, ejecutar
 ```bash
 docker exec api-ia python run_tests.py
 ```
-### En Windows, ejecutar
-```bash
-docker-compose up --build -d
 
-```
 
 # Uso de IA
 
