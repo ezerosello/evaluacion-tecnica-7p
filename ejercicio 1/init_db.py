@@ -48,18 +48,32 @@ def load_countries():
     db.commit()
     db.close()
 
+from datetime import datetime, timezone
+from requests.utils import quote
+
 def populate_capitals(api_key: str):
+    if not api_key:
+        raise RuntimeError("API_KEY no está definida en el entorno")
+
     db = SessionLocal()
     countries = db.query(Country).filter(Country.capital != None).all()
 
     for country in countries:
         capital_name = country.capital
-        url = f"https://api.openweathermap.org/data/2.5/weather?q={capital_name}&appid={api_key}&units=metric"
+        url = f"https://api.openweathermap.org/data/2.5/weather?q={quote(capital_name)}&appid={api_key}&units=metric"
         response = requests.get(url)
+
+        if response.status_code != 200:
+            print(f"No se encontró la capital {capital_name}: {response.status_code} - {response.text}")
+            continue
 
         data = response.json()
         temp = data.get("main", {}).get("temp")
         humidity = data.get("main", {}).get("humidity")
+
+        if temp is None or humidity is None:
+            print(f"⚠️ Datos incompletos para {capital_name}: temp={temp}, humidity={humidity}")
+            continue
 
         # Evitar duplicados
         if db.query(Capital).filter_by(name=capital_name, country_id=country.id).first():
