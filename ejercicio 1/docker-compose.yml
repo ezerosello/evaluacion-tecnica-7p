@@ -1,0 +1,10 @@
+services:
+  app:
+    build: .
+    container_name: fastapi_app
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./countries.db:/app/countries.db
+    environment:
+      - API_KEY=9a4e499d3f7bc641d86290a592416c6b

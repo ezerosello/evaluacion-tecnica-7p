@@ -1,67 +1,59 @@
-# Instalación de dependencias y ejecución
+# Ejecución con Docker
 
-### 1º Creación del entorno virtual
+## Desde la raiz del proyecto:
+
+### 1º Construir el proyecto
 ```bash
-python3 -m venv venv
+docker build -t api-exercise .
 ``` 
-### 2º Activación del entorno virtual
-```bash
-source venv/bin/activate (Linux)
-source venv/Scripts/activate (Windows)
-```
 
-### 3º Instalación de dependencias
+### 2º Correr la api
 ```bash
-pip install -r requirements.txt
-```
-
-### 4º Ejecución
-```bash
-uvicorn app:app --reload
+ docker run -p 8000:8000 api-exercise
 ```
 
 # Ejecución de tests
 
-### Desde la raiz del proyecto, ejecutar
 ```bash
-python run_tests.py
+docker-compose up --build -d
+docker exec fastapi_app python run_tests.py
 ```
 
 # Ejemplos de prueba:
 
 ### Obtener todos los países
 ```bash
-curl "http://127.0.0.1:8000/countries"
+curl "http://localhost:8000/countries"
 ```
 
 ### Obtener los países de una region
 ```bash
-curl "http://127.0.0.1:8000/countries?region=Americas"
+curl "http://localhost:8000/countries?region=Americas"
 ```
 
 ### Obtener población media de cada region
 ```bash
-curl "http://127.0.0.1:8000/countries/stats?metric=population"
+curl "http://localhost:8000/countries/stats?metric=population"
 ```
 
 ### Obtener area de cada region
 ```bash
-curl "http://127.0.0.1:8000/countries/stats?metric=area"
+curl "http://localhost:8000/countries/stats?metric=area"
 ```
 
 ### Obtener densidad poblacional de cada region
 ```bash
-curl "http://127.0.0.1:8000/countries/stats?metric=density"
+curl "http://localhost:8000/countries/stats?metric=density"
 ```
 
 ### Obtener todas las ciudades capitales
 ```bash
-curl "http://127.0.0.1:8000/capitals"
+curl "http://localhost:8000/capitals"
 ```
 
 ### Obtener información del clima de una capital
 ```bash
-curl "http://127.0.0.1:8000/weather/buenos%20aires"
+curl "http://localhost:8000/weather/buenos%20aires"
 ```
 
 

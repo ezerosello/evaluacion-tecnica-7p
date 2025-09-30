@@ -7,12 +7,13 @@ from schemas import CapitalOut, WeatherOut, CountryOut, RegionStat
 from sqlalchemy import func, case, cast, Float
 from sqlalchemy.orm import Session
 from typing import Optional, List
+import os
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     init_db()
     load_countries()
-    populate_capitals(api_key="9a4e499d3f7bc641d86290a592416c6b")
+    populate_capitals(api_key=os.getenv("API_KEY"))
     yield
 
 app = FastAPI(lifespan=lifespan)
@@ -24,7 +25,7 @@ def get_db():
     finally:
         db.close()
 
-
+# Endpoint para acceder a los datos de todos los países del mundo
 @app.get("/countries", response_model=List[CountryOut])
 def get_countries(region: Optional[str] = Query(None), db: Session = Depends(get_db)):
     if region:
@@ -35,7 +36,7 @@ def get_countries(region: Optional[str] = Query(None), db: Session = Depends(get
         countries = db.query(Country).all()
     return countries
 
-
+# Endpoint para acceder a estadisticas de cada region (population, area, density)
 @app.get("/countries/stats", response_model=List[RegionStat])
 def get_country_stats(metric: str, db: Session = Depends(get_db)):
     if metric in ["population", "area"]:
@@ -82,7 +83,7 @@ def get_country_stats(metric: str, db: Session = Depends(get_db)):
             detail="Metric must be one of: 'population', 'area', 'density'"
         )
     
-    
+# Endpoint para acceder a los datos de las capitales del mundo    
 @app.get("/capitals", response_model=List[CapitalOut])
 def get_capitals(db: Session = Depends(get_db)):
     capitals = db.query(Capital).join(Country).all()
@@ -99,7 +100,7 @@ def get_capitals(db: Session = Depends(get_db)):
         ))
     return result
 
-
+# Endpoint para acceder a los datos del clima de una capital
 @app.get("/weather/{city}", response_model=WeatherOut)
 def get_capital_weather(city: str, db: Session = Depends(get_db)):
     capital = db.query(Capital).filter(Capital.name.ilike(city)).first()
