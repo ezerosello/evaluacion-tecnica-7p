@@ -102,9 +102,25 @@ Testing inexistente     	    |   Generación de tests unitarios con pytest y cob
 ```
 
 
+# Ejecución y tests
 
 
-# Cómo ejecutar
+
+## Cómo ejecutar sin Docker
+
+Incluir en la carpeta data los archivos que se quiera analizar (incluyo sales1.json y sales2.csv como ejemplo).
+
+Crear el entorno virtual y activarlo
+```bash
+python -m venv venv
+source venv/bin/activate     # En Linux
+source venv/Scripts/activate # En Windows
+```
+
+Instalar las dependencias
+```bash
+pip install -r requirements.txt
+```
 
 Desde la raíz del proyecto, ejecutar
 ```bash
@@ -112,7 +128,7 @@ python -m src.main
 ```
 
 
-# Cómo correr los tests
+## Cómo correr los tests sin Docker
 
 Desde la raíz del proyecto, ejecutar
 ```bash
@@ -121,3 +137,21 @@ python -m pytest tests/ --cov=src --cov-report=term-missing     # para obtener i
 python -m pytest tests/ -v     # para simplemente correr los tests
 ```
 
+## Cómo ejecutar con Docker
+
+Construir con
+```bash
+docker build -t evaluacion7p .
+```
+
+Y en CMD (Windows) desde la raíz ejecutar:
+```CMD
+docker run --rm -v "%cd%\reports:C:\app\reports" evaluacion7p
+```
+
+## Cómo correr los tssts con Docker
+
+Ejecutar
+```bash 
+docker run --rm evaluacion7p python -m pytest tests/ -v
+```
