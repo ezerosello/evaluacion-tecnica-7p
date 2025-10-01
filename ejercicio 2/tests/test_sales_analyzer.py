@@ -29,7 +29,6 @@ def test_analyze_user_with_invalid_record(caplog):
     analyzer.analyze_user("102")
     assert "Invalid record after coercion" in caplog.text
 
-
 def test_missing_fields_logged(caplog):
     caplog.set_level(logging.WARNING)
     data = [
@@ -51,7 +50,6 @@ def test_all_records_invalid(caplog):
     assert result is False
     assert "All records for user 104 were invalid after coercion" in caplog.text
     assert analyzer.get_report("104") is None
-
 
 def test_mixed_valid_and_invalid_records(caplog):
     caplog.set_level(logging.WARNING)

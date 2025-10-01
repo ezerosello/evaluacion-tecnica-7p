@@ -1,6 +1,6 @@
 # Uso de IA
 
-### Prompts
+## Prompts
 
 - "Refactor legacy Python system into modular classes: DataLoader, SalesAnalyzer, ReportGenerator. Separate classes into data_loader.py, report_generator.py, sales_analyzer.py"
 
@@ -8,7 +8,7 @@
 
 - "Generate pytest unit tests for each class with >80% coverage"
 
-### Iteraciones y ajustes
+## Iteraciones y ajustes
 
 Los prompts evolucionaron para lograr mayor precisión:
 
@@ -19,7 +19,7 @@ Los prompts evolucionaron para lograr mayor precisión:
 - Ajusté el prompt de testing para incluir cobertura específica (>80%) y validación con pytest.
 
 
-### Validación de Sugerencias
+## Validación de Sugerencias
 
 - Se descartó el uso de fmean() por compatibilidad con Python 3.8.
 
@@ -30,9 +30,9 @@ Los prompts evolucionaron para lograr mayor precisión:
 - ChatGPT sugirió integrar una base de datos Postgres, descarté la idea por sobre diseño 
 
 
-### Fragmentos de diálogo relevantes
+## Fragmentos de diálogo relevantes
 
-- Le compartí mi código a Copilot y le pregunté si sugería cambios. Respondió:
+### Le compartí mi código a Copilot y le pregunté si sugería cambios. Respondió:
 ```
     Cambios sugeridos por módulo
 
@@ -41,13 +41,24 @@ Los prompts evolucionaron para lograr mayor precisión:
         2. Encoding explícito para evitar errores en CSV/JSON con caracteres especiales
     
     📊 sales_analyzer.py
-        1. Validación de campos antes del cálculo: evita errores si falta price, quantity o date.
+        Validación de campos antes del cálculo: evita errores si falta price, quantity o date
     
     📤 report_generator.py
-        1. Validación de estructura del reporte antes de exportar:
+        Validación de estructura del reporte antes de exportar
+
+    🚀 main.py
+        1. Validación de usuarios antes de procesar
+        2. Logging de inicio y fin del proceso
+
+    🧪 Bonus: Preparación para testing
+        Para facilitar los tests:
+
+        Agregá get_data() en DataLoader para exponer los datos.
+
+        Agregá get_report(user_id) en SalesAnalyzer para testear sin acceder a .reports directamente.
 
 ```
-- Le pedí a Copilot que me ayude a actualizar mis tests para que cubran más porcentaje. Respondió:
+### Le pedí a Copilot que me ayude a actualizar mis tests para que cubran más porcentaje. Respondió:
 
 ```
 Para aumentar la cobertura de tests y blindar el flujo completo, podemos agregar casos que validen:
@@ -78,6 +89,7 @@ Flujo completo de éxito y fracaso
 ```
 
 
+### Tabla comparativa
 
 ```
 Problema Original               |   Solución Implementada                                                   |   Herramienta IA Usada
@@ -104,7 +116,8 @@ python -m src.main
 
 Desde la raíz del proyecto, ejecutar
 ```bash
-python -m pytest tests/ --cov=src --cov-report=term-missing
+python -m pytest tests/ --cov=src --cov-report=term-missing     # para obtener informacion de coverage
+
+python -m pytest tests/ -v     # para simplemente correr los tests
 ```
 
-python -m pytest tests/ -v
