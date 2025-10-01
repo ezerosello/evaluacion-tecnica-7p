@@ -1,0 +1,23 @@
+[
+  {
+    "user_id": 42,
+    "date": "2025-01-15",
+    "product": "Laptop",
+    "price": 1200.50,
+    "quantity": 1
+  },
+  {
+    "user_id": 42,
+    "date": "2025-02-10",
+    "product": "Mouse",
+    "price": 25.00,
+    "quantity": 2
+  },
+  {
+    "user_id": 101,
+    "date": "2025-02-20",
+    "product": "Keyboard",
+    "price": 45.00,
+    "quantity": 1
+  }
+]

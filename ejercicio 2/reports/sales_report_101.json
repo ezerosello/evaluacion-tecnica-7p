@@ -1,0 +1,23 @@
+{
+  "monthly": {
+    "2025-02": {
+      "total": 45.0,
+      "count": 1,
+      "average": 45.0
+    },
+    "2025-03": {
+      "total": 140.0,
+      "count": 1,
+      "average": 140.0
+    }
+  },
+  "yearly": {
+    "2025": {
+      "total": 185.0,
+      "count": 2,
+      "average": 92.5
+    }
+  },
+  "user_id": "101",
+  "generated_at": "2025-10-01T00:21:05.246454"
+}
