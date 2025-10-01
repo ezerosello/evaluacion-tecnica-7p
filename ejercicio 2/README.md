@@ -12,6 +12,8 @@ ChatGPT sugirió enriquecer los reportes agregando:
 - Desviación estándar: std=('total', 'std')
 - Percentiles (ej. 90%): lambda x: x.quantile(0.9)
 
+ChatGPT sugirió reemplazar los bucles y defaultdict por pandas.groupby().agg() para mejorar performance y claridad. Se validó con tests unitarios y se mantuvo una versión nativa para compatibilidad.
+
 
 # Cómo ejecutar
 

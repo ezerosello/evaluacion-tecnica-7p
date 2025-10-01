@@ -2,6 +2,9 @@ import os
 import json
 import csv
 import logging
+import numpy as np
+
+
 
 class ReportGenerator:
     def __init__(self, prefs=None):
@@ -41,4 +44,9 @@ class ReportGenerator:
             writer.writerow(['Period', 'Total', 'Average', 'Count'])
             for period in ['monthly', 'yearly']:
                 for name, data in report[period].items():
-                    writer.writerow([name, data['total'], data['average'], data['count']])
+                    writer.writerow([
+                        name,
+                        np.round(data['total'], 2),
+                        np.round(data['average'], 2),
+                        data['count']
+                    ])
