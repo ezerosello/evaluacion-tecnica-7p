@@ -89,19 +89,6 @@ Flujo completo de éxito y fracaso
 ```
 
 
-### Tabla comparativa
-
-```
-Problema Original               |   Solución Implementada                                                   |   Herramienta IA Usada
---------------------------------|---------------------------------------------------------------------------|-------------------------
-Función monolítica	            |   Refactorización en clases: DataLoader, SalesAnalyzer, ReportGenerator   |       Copilot
-Promedio ineficiente	        |   Uso de pandas.groupby().agg() para sumar, contar y promediar	        |       ChatGPT
-Cálculo manual con bucles	    |   Vectorización con pandas y numpy	                                    |       ChatGPT
-Reportes con decimales largos	|   Redondeo con np.round() en exportación CSV	                            |       ChatGPT
-Testing inexistente     	    |   Generación de tests unitarios con pytest y cobertura >90%	            |       Copilot
-```
-
-
 # Ejecución y tests
 
 
@@ -112,7 +99,7 @@ Incluir en la carpeta data los archivos que se quiera analizar (incluyo sales1.j
 
 Crear el entorno virtual y activarlo
 ```bash
-python -m venv venv
+python3 -m venv venv
 source venv/bin/activate     # En Linux
 source venv/Scripts/activate # En Windows
 ```
@@ -124,7 +111,7 @@ pip install -r requirements.txt
 
 Desde la raíz del proyecto, ejecutar
 ```bash
-python -m src.main
+python3 -m src.main
 ```
 
 
@@ -132,9 +119,9 @@ python -m src.main
 
 Desde la raíz del proyecto, ejecutar
 ```bash
-python -m pytest tests/ --cov=src --cov-report=term-missing     # para obtener informacion de coverage
+python3 -m pytest tests/ --cov=src --cov-report=term-missing     # para obtener informacion de coverage
 
-python -m pytest tests/ -v     # para simplemente correr los tests
+python3 -m pytest tests/ -v     # para simplemente correr los tests
 ```
 
 ## Cómo ejecutar con Docker
@@ -144,10 +131,16 @@ Construir con
 docker build -t evaluacion7p .
 ```
 
-Y en CMD (Windows) desde la raíz ejecutar:
-```CMD
+En Windows, en CMD, desde la raíz ejecutar:
+```
 docker run --rm -v "%cd%\reports:C:\app\reports" evaluacion7p
 ```
+
+En Linux, ejecutar:
+```bash
+docker run --rm -v "$(pwd)/reports:/app/reports" evaluacion7p
+```
+
 
 ## Cómo correr los tssts con Docker
 
@@ -155,4 +148,19 @@ Ejecutar
 ```bash 
 docker run --rm evaluacion7p python -m pytest tests/ -v     # sin detalles de coverage
 docker run --rm evaluacion7p python -m pytest tests/ --cov=src --cov-report=term-missing    # con información de coverage
+
+```
+
+
+### Tabla comparativa
+
+```
+Problema Original               |   Solución Implementada                                                   |   Herramienta IA Usada
+--------------------------------|---------------------------------------------------------------------------|-------------------------
+Función monolítica	            |   Refactorización en clases: DataLoader, SalesAnalyzer, ReportGenerator   |       Copilot
+Promedio ineficiente	        |   Uso de pandas.groupby().agg() para sumar, contar y promediar	        |       ChatGPT
+Cálculo manual con bucles	    |   Vectorización con pandas y numpy	                                    |       ChatGPT
+Reportes con decimales largos	|   Redondeo con np.round() en exportación CSV	                            |       ChatGPT
+Testing inexistente     	    |   Generación de tests unitarios con pytest y cobertura >90%	            |       Copilot
+```
 ```
