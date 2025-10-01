@@ -153,5 +153,6 @@ docker run --rm -v "%cd%\reports:C:\app\reports" evaluacion7p
 
 Ejecutar
 ```bash 
-docker run --rm evaluacion7p python -m pytest tests/ -v
+docker run --rm evaluacion7p python -m pytest tests/ -v     # sin detalles de coverage
+docker run --rm evaluacion7p python -m pytest tests/ --cov=src --cov-report=term-missing    # con información de coverage
 ```
