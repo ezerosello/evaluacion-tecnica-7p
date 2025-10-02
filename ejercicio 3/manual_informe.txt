@@ -53,24 +53,16 @@ src/utils:
     - applyFilters.ts
 
 
-Una vez que tuve listo el Client Dashboard, de la misma utilicé Vite para crear el proyecto de qa-tool.
+Una vez que tuve listo el Client Dashboard, de la misma forma utilicé Vite para crear el proyecto de qa-tool.
 
-Empecé por crear la función wrongRegisters, que me devuelve los registros con errores. Y con esta función, cree, con ayuda de IA, la primera vista App.tsx que mostraba en formato json los elementos con errores.
+Empecé por crear la función wrongRegisters, que me devuelve los registros con errores. Y con esta función cree, con ayuda de IA, la primera vista App.tsx que mostraba en formato json los elementos con errores.
 
 ChatGPT me facilitó el App.tsx con una primera versión de la tabla, que modifiqué utilizando el archivo App.css
 
+Cuando ya tuve la vista de la tabla, agregué los botones para corregir datos y exportarlos.
+Armé el backend y le pedí ayuda a Copilot para hacer las funciones asociadas a los botones y para exportar los datos al backend.
 
-
-
-
-
-
-
-
-
-
-
-
+Finalmente, para implementar los tests en la qa-tool, le compartí mi código a Copilot y le pedí que me arme tests para probar la herramienta.
 
 
 
@@ -95,17 +87,42 @@ Respondí "si" y me compartió un SalesChart.tsx inicial.
 
 - "Cómo debería encarar el qa-tool"
 
-- "Cómo aplico una función al botón corregir datos"
-
 - "Función para exportar los datos corregidos"
+
+- "Tests E2E con Cypress"
+
+
+
+
+
+
+
+
+
+
 
 
 
 ##### Fragmentos de código generados por IA y cómo se adaptaron manualmente #####
 
-Adapté los fragmentos de código generados por IA para solucionar problemas de importaciones (por ejemplo, cambiar "import { Sale } from "../types/sales"" por "import type { Sale } from "../types/sales""). 
+En Client Dashboard:
 
-Adapté el archivo App.tsx para que tome los estilos de App.css, y a este último le realicé modificaciones para que el Dashboard sea visualmente más estético
+    - Adapté los fragmentos de código generados por IA para solucionar problemas de importaciones (por ejemplo, cambiar "import { Sale } from "../types/sales"" por "import type { Sale } from "../types/sales""). 
+
+    - Adapté el archivo App.tsx para que tome los estilos de App.css, y a este último le realicé modificaciones para que el Dashboard sea visualmente más estético
+
+En QA-Tool:
+
+    - Adapté el archivo cleanData.ts generado por IA del Dashboard para filtrar según la necesidad del qa-tool
+
+
+
+
+
+
+
+
+
 
 
 
@@ -116,3 +133,5 @@ Independientemente de las sugerencias de la IA, tomé decisiones sobre la organi
 Agregué el filtro de precio mayor a 0
 
 Tomé la decisión de agregar un backend para comunicar las dos aplicaciones y poder pasar el json de datos corregidos desde qa-tool hacia el dashboard
+
+Tomé la decisión de que el sales_data.json se guarde en el backend, para que el client dashboard y la herramienta qa accedan a un mismo archivo
