@@ -55,10 +55,9 @@ src/utils:
 
 Una vez que tuve listo el Client Dashboard, de la misma utilicé Vite para crear el proyecto de qa-tool.
 
+Empecé por crear la función wrongRegisters, que me devuelve los registros con errores. Y con esta función, cree, con ayuda de IA, la primera vista App.tsx que mostraba en formato json los elementos con errores.
 
-
-
-
+ChatGPT me facilitó el App.tsx con una primera versión de la tabla, que modifiqué utilizando el archivo App.css
 
 
 
@@ -96,6 +95,10 @@ Respondí "si" y me compartió un SalesChart.tsx inicial.
 
 - "Cómo debería encarar el qa-tool"
 
+- "Cómo aplico una función al botón corregir datos"
+
+- "Función para exportar los datos corregidos"
+
 
 
 ##### Fragmentos de código generados por IA y cómo se adaptaron manualmente #####
@@ -110,4 +113,6 @@ Adapté el archivo App.tsx para que tome los estilos de App.css, y a este últim
 
 Independientemente de las sugerencias de la IA, tomé decisiones sobre la organización del trabajo: comenzar con el Dashboard para el cliente y, una vez que lo tuviera listo, continuar con la herramienta de QA. 
 
-Además, 
+Agregué el filtro de precio mayor a 0
+
+Tomé la decisión de agregar un backend para comunicar las dos aplicaciones y poder pasar el json de datos corregidos desde qa-tool hacia el dashboard
