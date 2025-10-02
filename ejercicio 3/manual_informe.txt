@@ -1,0 +1,113 @@
+- El archivo manual_informe.txt debe contener:
+
+    * Explicación en primera persona del proceso de desarrollo
+
+    * Prompts exactos utilizados con las herramientas de IA
+
+    * Fragmentos de código generados por IA y cómo se adaptaron manualmente
+
+    * Decisiones tomadas independientemente de las sugerencias de IA
+
+
+
+##### Explicación en primera persona del proceso de desarrollo. #####
+
+Para el desarrollo de la aplicación, decidí comenzar por el Dashboard de visualización de datos. Como no tengo experiencia usando React, me ayudé mucho de las inteligencias artificiales. Para la creación del proyecto, por recomendación de ChatGPT, utilicé Vite, ejecutando los siguientes comandos para crear y levantar un servidor:
+
+        npm create vite@latest client-dashboard -- --template react-ts
+        cd client-dashboard
+        npm install
+        npm run dev
+
+De esta forma quedó definida una estructura que yo completé creando las carpetas src/components, src/hooks, src/utils y src/types.
+
+Una vez definida la estructura del proyecto, definí en la primera iteración:
+    
+    
+src/types:
+    - sales.ts
+
+src/hooks:
+    - useSalesData.ts
+
+src/utils:
+    - cleanData.ts
+    - metrics.ts
+
+
+Para sumar el gráfico de ventas por día, incluí:
+
+src/components:
+    - SalesChart.tsx
+
+
+Y para agregar los filtros de fecha y producto:
+
+src/hooks:
+    - userFilters.ts
+
+src/components:
+    - Filters.tsx
+
+src/utils:
+    - applyFilters.ts
+
+
+Una vez que tuve listo el Client Dashboard, de la misma utilicé Vite para crear el proyecto de qa-tool.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+##### Prompts utilizados #####
+
+Le compartí a ChatGPT el proyecto que quería armar y utilicé los siguentes prompts:
+
+- "Cómo debería comenzar el proyecto del dashboard": me indicó cómo crear el proyecto con Vite y me compartió unos archivos iniciales: sales.ts, useSalesData.ts, cleanData.ts y metrics.ts.
+
+En su respuesta, ChatGPT dijo:
+"El siguiente paso sería darle un poco de vida con gráficos usando Chart.js. Por ejemplo: un gráfico de barras con ventas por día.
+
+¿Querés que te arme directamente un ejemplo con react-chartjs-2 para que lo pegues y ya veas un gráfico en tu dashboard?"
+
+Respondí "si" y me compartió un SalesChart.tsx inicial.
+
+- "Archivo para aplicar los filtros de fecha y producto en mi dashboard": me recomendó incluir los archivos userFilters.ts, Filters.ts y applyFilters.ts
+
+- "Cómo debería encarar el qa-tool"
+
+
+
+##### Fragmentos de código generados por IA y cómo se adaptaron manualmente #####
+
+Adapté los fragmentos de código generados por IA para solucionar problemas de importaciones (por ejemplo, cambiar "import { Sale } from "../types/sales"" por "import type { Sale } from "../types/sales""). 
+
+Adapté el archivo App.tsx para que tome los estilos de App.css, y a este último le realicé modificaciones para que el Dashboard sea visualmente más estético
+
+
+
+##### Decisiones tomadas independientemente de las sugerencias de la IA #####
+
+Independientemente de las sugerencias de la IA, tomé decisiones sobre la organización del trabajo: comenzar con el Dashboard para el cliente y, una vez que lo tuviera listo, continuar con la herramienta de QA. 
+
+Además, 

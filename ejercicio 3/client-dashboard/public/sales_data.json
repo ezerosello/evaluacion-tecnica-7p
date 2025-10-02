@@ -12,7 +12,7 @@
             "id": 2,
             "date": "2023-01-15",
             "product": "Mouse",
-            "quantity": -3, 
+            "quantity": -3,
             "price": 25,
             "rating": 3.8
         },
@@ -23,14 +23,6 @@
             "quantity": 1,
             "price": 300,
             "rating": 5.0
-        },
-        {
-            "id": 1,
-            "date": "2023-01-15",
-            "product": "ratón",
-            "quantity": 3,
-            "price": 1200,
-            "rating": 4.5
         }
     ]
 }

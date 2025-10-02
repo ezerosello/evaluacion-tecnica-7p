@@ -21,19 +21,19 @@ function App() {
 
   return (
     <div className="p-6">
-      <h1 className="text-2xl font-bold mb-4">Dashboard</h1>
-
-      <FiltersComponent
-        filters={filters}
-        updateFilter={updateFilter}
-        products={uniqueProducts}
-      />
+      <h1 className="text-2xl font-bold mb-4">Client Dashboard</h1>
 
       <div className="mb-4">
         <p>Total Ventas: ${totalSales(filteredSales)}</p>
         <p>Producto más vendido: {bestProduct(filteredSales)}</p>
         <p>Rating promedio: {filteredSales.length > 0 ? avgRating(filteredSales).toFixed(2) : "N/A"}</p>
       </div>
+
+      <FiltersComponent
+        filters={filters}
+        updateFilter={updateFilter}
+        products={uniqueProducts}
+      />
 
       <SalesChart sales={filteredSales} />
     </div>
