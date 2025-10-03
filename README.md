@@ -1,1 +1,0 @@
-# evaluacion-tecnica-7p

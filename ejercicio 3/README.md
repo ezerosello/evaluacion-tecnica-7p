@@ -1,5 +1,7 @@
 # Cómo correr la aplicación
 
+## Asegurarse de usar una versión de Node igual o superior a 22.12.0
+
 ## Backend
 
 ### Desde la carpeta backend, ejecutar en terminal los comandos

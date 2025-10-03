@@ -1,15 +1,3 @@
-- El archivo manual_informe.txt debe contener:
-
-    * Explicación en primera persona del proceso de desarrollo
-
-    * Prompts exactos utilizados con las herramientas de IA
-
-    * Fragmentos de código generados por IA y cómo se adaptaron manualmente
-
-    * Decisiones tomadas independientemente de las sugerencias de IA
-
-
-
 ##### Explicación en primera persona del proceso de desarrollo. #####
 
 Para el desarrollo de la aplicación, decidí comenzar por el Dashboard de visualización de datos. Como no tengo experiencia usando React, me ayudé mucho de las inteligencias artificiales. Para la creación del proyecto, por recomendación de ChatGPT, utilicé Vite, ejecutando los siguientes comandos para crear y levantar un servidor:
@@ -19,10 +7,9 @@ Para el desarrollo de la aplicación, decidí comenzar por el Dashboard de visua
         npm install
         npm run dev
 
-De esta forma quedó definida una estructura que yo completé creando las carpetas src/components, src/hooks, src/utils y src/types.
+De esta forma quedó definida una estructura que completé creando las carpetas src/components, src/hooks, src/utils y src/types.
 
 Una vez definida la estructura del proyecto, definí en la primera iteración:
-    
     
 src/types:
     - sales.ts
@@ -34,14 +21,12 @@ src/utils:
     - cleanData.ts
     - metrics.ts
 
-
 Para sumar el gráfico de ventas por día, incluí:
 
 src/components:
     - SalesChart.tsx
 
-
-Y para agregar los filtros de fecha y producto:
+Y, para agregar los filtros de fecha y producto:
 
 src/hooks:
     - userFilters.ts
@@ -52,7 +37,6 @@ src/components:
 src/utils:
     - applyFilters.ts
 
-
 Una vez que tuve listo el Client Dashboard, de la misma forma utilicé Vite para crear el proyecto de qa-tool.
 
 Empecé por crear la función wrongRegisters, que me devuelve los registros con errores. Y con esta función cree, con ayuda de IA, la primera vista App.tsx que mostraba en formato json los elementos con errores.
@@ -62,11 +46,7 @@ ChatGPT me facilitó el App.tsx con una primera versión de la tabla, que modifi
 Cuando ya tuve la vista de la tabla, agregué los botones para corregir datos y exportarlos.
 Armé el backend y le pedí ayuda a Copilot para hacer las funciones asociadas a los botones y para exportar los datos al backend.
 
-Finalmente, para implementar los tests en la qa-tool, le compartí mi código a Copilot y le pedí que me arme tests para probar la herramienta.
-
-
-
-
+Finalmente, para implementar los tests en la qa-tool, le compartí mi código a Copilot y le pedí que me arme tests para probar la herramienta. En esta parte, tuve problemas en la integración con Cypress y Jest que no llegué a solucionar, por lo que en la versión que estoy entregando me falta este requisito.
 
 
 
@@ -93,16 +73,6 @@ Respondí "si" y me compartió un SalesChart.tsx inicial.
 
 
 
-
-
-
-
-
-
-
-
-
-
 ##### Fragmentos de código generados por IA y cómo se adaptaron manualmente #####
 
 En Client Dashboard:
@@ -113,16 +83,9 @@ En Client Dashboard:
 
 En QA-Tool:
 
-    - Adapté el archivo cleanData.ts generado por IA del Dashboard para filtrar según la necesidad del qa-tool
+    - Adapté el archivo cleanData.ts generado por IA del Dashboard para filtrar según la necesidad del qa-tool.
 
-
-
-
-
-
-
-
-
+    - Adapté el archivo App.css para mejorar un poco los estilos de la tabla.
 
 
 
@@ -130,8 +93,8 @@ En QA-Tool:
 
 Independientemente de las sugerencias de la IA, tomé decisiones sobre la organización del trabajo: comenzar con el Dashboard para el cliente y, una vez que lo tuviera listo, continuar con la herramienta de QA. 
 
-Agregué el filtro de precio mayor a 0
+Agregué el filtro de precio mayor a 0.
 
-Tomé la decisión de agregar un backend para comunicar las dos aplicaciones y poder pasar el json de datos corregidos desde qa-tool hacia el dashboard
+Tomé la decisión de agregar un backend para comunicar las dos aplicaciones y poder pasar el json de datos corregidos desde qa-tool hacia el dashboard.
 
-Tomé la decisión de que el sales_data.json se guarde en el backend, para que el client dashboard y la herramienta qa accedan a un mismo archivo
+Tomé la decisión de que el sales_data.json se guarde en el backend, para que el client dashboard y la herramienta qa accedan a un mismo archivo.
